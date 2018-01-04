@@ -9,6 +9,7 @@
             <script type='text/javascript' src='js/engine.js'> </script>
   <script type='text/javascript' src='js/util.js'> </script>
     <script type='text/javascript' src='js/DWRCall.js'></script>
+    <script type="text/javascript" src="js/dojo/dojo/dojo.js" data-dojo-config="parseOnLoad: true, async: true"></script>
   
 
            
@@ -22,10 +23,34 @@
  document.getElementById("dwrdemo").innerHTML = data;
  }
  </script> 
+ <script type="text/javascript">
+ var dojoConfig = {
+		    async: true,
+		    baseUrl: '.',
+		    packages: [
+		        'dojo',
+		        'dijit',
+		        'dojox',
+		        'demo'
+		    ]
+		};
+
+ </script>
+ <script type="text/javascript">
+ require([
+	    'dojo/dom',
+	    'dojo/domReady!'
+	], function (dom) {
+	 callMethod();
+	    var greeting = dom.byId('greeting');
+	    greeting.innerHTML += ' from Dojo!';
+	});
+ </script>
        </head>
     <body>
       <h3>DWR Implementation</h3><br>
 <br> <input type="button" value="getData" onclick="callMethod()"> <br>
 <div id="dwrdemo"></div> <hr>
+<h1 id="greeting">Hello</h1>
   </body>
 </html>

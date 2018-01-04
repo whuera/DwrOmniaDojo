@@ -12,8 +12,8 @@ public class DWRCall {
 	{
 		String value = null;
 		try {
-			Thread.sleep(100000);
-			value = "DWR implemented, String returned from server.";
+			Thread.sleep(10000);
+			value = "Respuesta desde el servidor 22222.";
 		} catch (Exception e) {
 			
 			value = "Error in callback";
