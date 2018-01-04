@@ -1,42 +1,10 @@
 //>>built
-define("dojox/calendar/StoreMixin",["dojo/_base/declare","dojo/_base/array","dojo/_base/html","dojo/_base/lang","dojo/dom-class","dojo/Stateful","dojo/when"],function(_1,_2,_3,_4,_5,_6,_7){
-return _1("dojox.calendar.StoreMixin",_6,{store:null,query:{},queryOptions:null,startTimeAttr:"startTime",endTimeAttr:"endTime",summaryAttr:"summary",allDayAttr:"allDay",subColumnAttr:"calendar",cssClassFunc:null,decodeDate:null,encodeDate:null,displayedItemsInvalidated:false,itemToRenderItem:function(_8,_9){
-if(this.owner){
-return this.owner.itemToRenderItem(_8,_9);
-}
-return {id:_9.getIdentity(_8),summary:_8[this.summaryAttr],startTime:(this.decodeDate&&this.decodeDate(_8[this.startTimeAttr]))||this.newDate(_8[this.startTimeAttr],this.dateClassObj),endTime:(this.decodeDate&&this.decodeDate(_8[this.endTimeAttr]))||this.newDate(_8[this.endTimeAttr],this.dateClassObj),allDay:_8[this.allDayAttr]!=null?_8[this.allDayAttr]:false,subColumn:_8[this.subColumnAttr],cssClass:this.cssClassFunc?this.cssClassFunc(_8):null};
-},renderItemToItem:function(_a,_b){
-if(this.owner){
-return this.owner.renderItemToItem(_a,_b);
-}
-var _c={};
-_c[_b.idProperty]=_a.id;
-_c[this.summaryAttr]=_a.summary;
-_c[this.startTimeAttr]=(this.encodeDate&&this.encodeDate(_a.startTime))||_a.startTime;
-_c[this.endTimeAttr]=(this.encodeDate&&this.encodeDate(_a.endTime))||_a.endTime;
-if(_a.subColumn){
-_c[this.subColumnAttr]=_a.subColumn;
-}
-return this.getItemStoreState(_a)==="unstored"?_c:_4.mixin(_a._item,_c);
-},_computeVisibleItems:function(_d){
-if(this.owner){
-return this.owner._computeVisibleItems(_d);
-}
-_d.items=this.storeManager._computeVisibleItems(_d);
-},_initItems:function(_e){
-this.set("items",_e);
-return _e;
-},_refreshItemsRendering:function(_f){
-},_setStoreAttr:function(_10){
-this.store=_10;
-return this.storeManager.set("store",_10);
-},_getItemStoreStateObj:function(_11){
-return this.storeManager._getItemStoreStateObj(_11);
-},getItemStoreState:function(_12){
-return this.storeManager.getItemStoreState(_12);
-},_cleanItemStoreState:function(id){
-this.storeManager._cleanItemStoreState(id);
-},_setItemStoreState:function(_13,_14){
-this.storeManager._setItemStoreState(_13,_14);
-}});
-});
+define("dojox/calendar/StoreMixin","dojo/_base/declare dojo/_base/array dojo/_base/html dojo/_base/lang dojo/dom-class dojo/Stateful dojo/when".split(" "),function(h,k,n,g,p,l,m){return h("dojox.calendar.StoreMixin",l,{store:null,query:{},queryOptions:null,startTimeAttr:"startTime",endTimeAttr:"endTime",summaryAttr:"summary",allDayAttr:"allDay",cssClassFunc:null,decodeDate:null,encodeDate:null,displayedItemsInvalidated:!1,itemToRenderItem:function(a,b){return this.owner?this.owner.itemToRenderItem(a,
+b):{id:b.getIdentity(a),summary:a[this.summaryAttr],startTime:this.decodeDate&&this.decodeDate(a[this.startTimeAttr])||this.newDate(a[this.startTimeAttr],this.dateClassObj),endTime:this.decodeDate&&this.decodeDate(a[this.endTimeAttr])||this.newDate(a[this.endTimeAttr],this.dateClassObj),allDay:null!=a[this.allDayAttr]?a[this.allDayAttr]:!1,cssClass:this.cssClassFunc?this.cssClassFunc(a):null}},renderItemToItem:function(a,b){if(this.owner)return this.owner.renderItemToItem(a,b);var c={};c[b.idProperty]=
+a.id;c[this.summaryAttr]=a.summary;c[this.startTimeAttr]=this.encodeDate&&this.encodeDate(a.startTime)||a.startTime;c[this.endTimeAttr]=this.encodeDate&&this.encodeDate(a.endTime)||a.endTime;return g.mixin(b.get(a.id),c)},_computeVisibleItems:function(a){var b=a.startTime,c=a.endTime;this.items&&(a.items=k.filter(this.items,function(e){return this.isOverlapping(a,e.startTime,e.endTime,b,c)},this))},_initItems:function(a){this.set("items",a);return a},_refreshItemsRendering:function(a){},_updateItems:function(a,
+b,c){var e=!0,f=null,d=this.itemToRenderItem(a,this.store);d._item=a;if(-1!=b)c!=b?(this.items.splice(b,1),this.setItemSelected&&this.isItemSelected(d)&&(this.setItemSelected(d,!1),this.dispatchChange(d,this.get("selectedItem"),null,null))):(f=this.items[b],c=this.dateModule,e=0!=c.compare(d.startTime,f.startTime)||0!=c.compare(d.endTime,f.endTime),g.mixin(f,d));else if(-1!=c){if(a=this._getItemStoreStateObj(d)){if(this.items[c].id!=d.id){for(b=this.items.length-1;0<=b;b--)if(this.items[b].id==d.id){this.items.splice(b,
+1);break}this.items.splice(c,0,d)}g.mixin(a.renderItem,d)}else this.items.splice(c,0,d);this.set("items",this.items)}this._setItemStoreState(d,"stored");this._isEditing||(e?this._refreshItemsRendering():this.updateRenderers(f))},_setStoreAttr:function(a){this.displayedItemsInvalidated=!0;var b;this._observeHandler&&(this._observeHandler.remove(),this._observeHandler=null);a?(b=a.query(this.query,this.queryOptions),b.observe&&(this._observeHandler=b.observe(g.hitch(this,this._updateItems),!0)),b=b.map(g.hitch(this,
+function(b){var e=this.itemToRenderItem(b,a);e._item=b;return e})),b=m(b,g.hitch(this,this._initItems))):b=this._initItems([]);this._set("store",a);return b},_getItemStoreStateObj:function(a){if(this.owner)return this.owner._getItemStoreStateObj(a);var b=this.get("store");return null!=b&&null!=this._itemStoreState?(a=void 0==a.id?b.getIdentity(a):a.id,this._itemStoreState[a]):null},getItemStoreState:function(a){if(this.owner)return this.owner.getItemStoreState(a);if(null==this._itemStoreState)return"stored";
+var b=this.get("store");a=void 0==a.id?b.getIdentity(a):a.id;a=this._itemStoreState[a];return null!=b&&void 0!=a?a.state:"stored"},_setItemStoreState:function(a,b){if(this.owner)this.owner._setItemStoreState(a,b);else{void 0==this._itemStoreState&&(this._itemStoreState={});var c=this.get("store"),e=void 0==a.id?c.getIdentity(a):a.id,f=this._itemStoreState[e];"stored"==b||null==b?void 0!=f&&delete this._itemStoreState[e]:c&&(this._itemStoreState[e]={id:e,item:a,renderItem:this.itemToRenderItem(a,c),
+state:b})}}})});
+//@ sourceMappingURL=StoreMixin.js.map

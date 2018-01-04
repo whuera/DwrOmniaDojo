@@ -1,37 +1,4 @@
-/*
-	Copyright (c) 2004-2016, The JS Foundation All Rights Reserved.
-	Available via Academic Free License >= 2.1 OR the modified BSD license.
-	see: http://dojotoolkit.org/license for details
-*/
-
 //>>built
-define("dojo/uacss",["./dom-geometry","./_base/lang","./domReady","./sniff","./_base/window"],function(_1,_2,_3,_4,_5){
-var _6=_5.doc.documentElement,ie=_4("ie"),_7=_4("trident"),_8=_4("opera"),_9=Math.floor,ff=_4("ff"),_a=_1.boxModel.replace(/-/,""),_b={"dj_quirks":_4("quirks"),"dj_opera":_8,"dj_khtml":_4("khtml"),"dj_webkit":_4("webkit"),"dj_safari":_4("safari"),"dj_chrome":_4("chrome"),"dj_edge":_4("edge"),"dj_gecko":_4("mozilla"),"dj_ios":_4("ios"),"dj_android":_4("android")};
-if(ie){
-_b["dj_ie"]=true;
-_b["dj_ie"+_9(ie)]=true;
-_b["dj_iequirks"]=_4("quirks");
-}
-if(_7){
-_b["dj_trident"]=true;
-_b["dj_trident"+_9(_7)]=true;
-}
-if(ff){
-_b["dj_ff"+_9(ff)]=true;
-}
-_b["dj_"+_a]=true;
-var _c="";
-for(var _d in _b){
-if(_b[_d]){
-_c+=_d+" ";
-}
-}
-_6.className=_2.trim(_6.className+" "+_c);
-_3(function(){
-if(!_1.isBodyLtr()){
-var _e="dj_rtl dijitRtl "+_c.replace(/ /g,"-rtl ");
-_6.className=_2.trim(_6.className+" "+_e+"dj_rtl dijitRtl "+_c.replace(/ /g,"-rtl "));
-}
-});
-return _4;
-});
+define("dojo/uacss",["./dom-geometry","./_base/lang","./domReady","./sniff","./_base/window"],function(g,h,m,a,d){var e=d.doc.documentElement;d=a("ie");var b=a("opera"),k=Math.floor,l=a("ff"),n=g.boxModel.replace(/-/,""),b={dj_quirks:a("quirks"),dj_opera:b,dj_khtml:a("khtml"),dj_webkit:a("webkit"),dj_safari:a("safari"),dj_chrome:a("chrome"),dj_gecko:a("mozilla"),dj_ios:a("ios"),dj_android:a("android")};d&&(b.dj_ie=!0,b["dj_ie"+k(d)]=!0,b.dj_iequirks=a("quirks"));l&&(b["dj_ff"+k(l)]=!0);b["dj_"+n]=
+!0;var c="",f;for(f in b)b[f]&&(c+=f+" ");e.className=h.trim(e.className+" "+c);m(function(){if(!g.isBodyLtr()){var a="dj_rtl dijitRtl "+c.replace(/ /g,"-rtl ");e.className=h.trim(e.className+" "+a+"dj_rtl dijitRtl "+c.replace(/ /g,"-rtl "))}});return a});
+//@ sourceMappingURL=uacss.js.map
