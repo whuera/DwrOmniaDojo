@@ -1,3 +1,4 @@
+
 package ec.com.app.controller;
 
 import java.io.IOException;
@@ -7,12 +8,29 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
  import javax.servlet.http.HttpServletResponse;
  
- public class add extends HttpServlet {
-/**
-	 * 
+ /**
+	 * The Class add.
 	 */
+ public class add extends HttpServlet {
+
+/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+
+/** The val 3. */
 String val3;
+
+/**
+ * Process request.
+ *
+ * @param request
+ *            the request
+ * @param response
+ *            the response
+ * @throws ServletException
+ *             the servlet exception
+ * @throws IOException
+ *             Signals that an I/O exception has occurred.
+ */
 protected void processRequest(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
     response.setContentType("text/html;charset=UTF-8");
@@ -34,6 +52,9 @@ protected void processRequest(HttpServletRequest request, HttpServletResponse re
 }
 
 
+/* (non-Javadoc)
+ * @see javax.servlet.http.HttpServlet#doGet(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+ */
 @Override
 protected void doGet(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
@@ -41,6 +62,9 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response)
 }
 
 
+/* (non-Javadoc)
+ * @see javax.servlet.http.HttpServlet#doPost(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+ */
 @Override
 protected void doPost(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
@@ -48,6 +72,9 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response)
 }
 
 
+/* (non-Javadoc)
+ * @see javax.servlet.GenericServlet#getServletInfo()
+ */
 @Override
 public String getServletInfo() {
     return "Short description";
