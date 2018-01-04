@@ -5,7 +5,7 @@
         <head>
            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
            <title>JSP Page</title>
-           
+           <link rel="stylesheet" href="js/dojo/dijit/themes/claro/claro.css" />
             <script type='text/javascript' src='js/engine.js'> </script>
   <script type='text/javascript' src='js/util.js'> </script>
     <script type='text/javascript' src='js/DWRCall.js'></script>
@@ -15,6 +15,7 @@
 
            
             <script type="text/javascript">
+            
  function callMethod(){
 	
  DWRCall.getString(getData);
@@ -24,6 +25,7 @@
  document.getElementById("dwrdemo").innerHTML = data;
  }
  </script> 
+
  <script type="text/javascript">
  var dojoConfig = {
 		    async: true,
@@ -42,16 +44,34 @@
 	    'dojo/dom',
 	    'dojo/domReady!'
 	], function (dom) {
-	 callMethod();
+	 //callMethod();
 	    var greeting = dom.byId('greeting');
-	    greeting.innerHTML += ' Dojo!';
+	    greeting.innerHTML += ' DWR / Dojo!';
+	   
+	});
+ </script>
+ <script type="text/javascript">
+ require(["dijit/form/Button", "dojo/dom", "dojo/domReady!"], function(Button, dom){
+	    // Create a button programmatically:
+	    var myButton = new Button({
+	        label: "getData!",
+	        onClick: function(){
+	            // Do something:
+	            callMethod();
+	            dom.byId("result1").innerHTML += "procesando! ";
+	        }
+	    }, "progButtonNode").startup();
 	});
  </script>
        </head>
     <body class="claro">
       <h3>DWR Implementation</h3><br>
-<br> <input type="button" value="getData" onclick="callMethod()"> <br>
-<div id="dwrdemo"></div> <hr>
+<br> 
+
 <h1 id="greeting">Test</h1>
+<button id="progButtonNode" type="button"></button>
+<div id="result1"></div>
+<hr>
+<div id="dwrdemo"></div> 
   </body>
 </html>
