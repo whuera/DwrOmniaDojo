@@ -19,12 +19,23 @@
  function callMethod(){
 	
  DWRCall.getString(getData);
+ //DWRCall.getDataEx();
+ 
  }
  function getData(data)
  {
  document.getElementById("dwrdemo").innerHTML = data;
  }
  </script> 
+ <script type="text/javascript">
+ function errh(msg, exc) {
+	  alert("Error message is: " + msg + " - Error Details: " + dwr.util.toDescriptiveString(exc, 2));
+	}
+
+	dwr.engine.setErrorHandler(errh);
+
+	//DWRCall.getDataEx(function(data) { alert(data); });
+ </script>
 
  <script type="text/javascript">
  var dojoConfig = {
@@ -57,6 +68,7 @@
 	        label: "getData!",
 	        onClick: function(){
 	            // Do something:
+	            
 	            callMethod();
 	            dom.byId("result1").innerHTML += "procesando! ";
 	        }
