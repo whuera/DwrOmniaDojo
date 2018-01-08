@@ -69,11 +69,22 @@
 	        onClick: function(){
 	            // Do something:
 	            
-	            callMethod();
+	            callback:callMethod();
 	            dom.byId("result1").innerHTML += "procesando! ";
 	        }
 	    }, "progButtonNode").startup();
 	});
+ </script>
+ 
+ <script type="text/javascript">
+
+// DWRCall.getData(42, {
+//	  callback:function(str) { alert(str); },
+//	  timeout:5000,
+//	  errorHandler:function(message) { alert("Oops: " + message); }
+//	});
+
+
  </script>
        </head>
     <body class="claro">
